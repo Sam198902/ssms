@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>土壤样品管理</title>
+    <meta name="keywords" content="土壤样品管理">
+    <meta name="description" content="土壤样品管理">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list {
+            top: 900px !important;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight" >
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>用户信息管理</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <h4 class="m-t"></h4>
+                        <div class="jqGrid_wrapper">
+                            <table id="table_list"></table>
+                            <div id="pager_list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="text-align: center">
+                        <div class="list-group">
+                            <h3 class="list-group-item-heading">土壤样品采集现场记录表</h3>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" id="myForm">
+                            <div id="citymodel" class="citys">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">省</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-b " data-placeholder="省"  id ="sample_provice" name="province" data-pos="0">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">市/区</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-b " data-placeholder="市/区"  id ="sample_city" name="city" data-pos="0">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">县</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-b " data-placeholder="县" id="sample_area" name="area" data-pos="0">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">乡镇</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="乡镇"  id="sample_towns">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">村/街道</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="村/街道"  id="sample_village">
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">东经</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" placeholder="东经" id="sample_lon">
+                                        <span class="input-group-addon">°</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">北纬</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" placeholder="北纬" id="sample_lat">
+                                        <span class="input-group-addon">°</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">海拔</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" placeholder="海拔" id="sample_altitude">
+                                        <span class="input-group-addon">m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">天气状况</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" data-placeholder="天气状况"  id="sample_weather">
+                                        <option disabled selected value></option>
+                                        <option>晴天</option>
+                                        <option>阴天</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">采样深度</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" placeholder="采样深度" id="sample_depth">
+                                        <span class="input-group-addon">cm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">采样重量</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control" placeholder="采样重量" id="take_weight">
+                                        <span class="input-group-addon">KG</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label ">采样时间</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group date m-b" data-provide="datepicker">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="采样时间" id="sample_time">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="hr-line-dashed"></div>
+                            <br>
+
+                            <h5 align="center">土壤基本信息</h5>
+                            <div class="hr-line-solid"></div>
+                            <br>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-navy">土地利用</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="using"  value="旱地" >旱地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input  type="radio" name="using"  value="水田" >水田</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="using"  value="林地" >林地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input  type="radio" name="using" value="草地">草地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text"  name="using" placeholder="其他土地利用" id="sample_using"  value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-danger">作物类型</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="use_type"  value="小麦">小麦</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="use_type" value="水稻">水稻</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="use_type"  value="玉米">玉米</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="use_type"  value="豆类">豆类</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="use_type" value="蔬菜">蔬菜</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="use_type" placeholder="其他作物类型" id="sample_use_type" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-info">地形地貌</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_face"  value="山地">山地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_face"  value="平原">平原</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_face"  value="丘陵">丘陵</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_face"  value="沟谷">沟谷</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_face" value="岗地">岗地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="soil_face" placeholder="其他地形地貌" id="sample_soil_face" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-warning">土壤类型</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type"  value="红壤">红壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="黄壤">黄壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="黄棕壤">黄棕壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="山地黄棕壤">山地黄棕壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="棕壤">棕壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="暗棕壤">暗棕壤</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="草甸土">草甸土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="紫色土">紫色土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="石灰土">石灰土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="潮土">潮土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_type" value="水稻土">水稻土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="soil_type" placeholder="其他土壤类型" id="sample_soil_type" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-success">土壤质地</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_texture" value="砂土">砂土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_texture" value="壤土">壤土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_texture" value="粘土">粘土</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="soil_texture" placeholder="其他土壤质地" id="sample_soil_texture" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-navy">土壤颜色</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="黑">黑</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color"  value="暗栗">暗栗</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="暗棕">暗棕</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color"  value="暗灰">暗灰</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color"  value="栗" >栗</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="棕">棕</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="灰">灰</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="红棕">红棕</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="黄棕">黄棕</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="浅棕">浅棕</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color"  value="红">红</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="橙">橙</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color"  value="黄">黄</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="soil_color" value="浅黄">浅黄</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <input type="text" class="form-control" name="soil_color" placeholder="其他土壤颜色" id="sample_soil_color">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <br>
+                            <h5 align="center">采样点周边信息（1Km 内）</h5>
+                            <div class="hr-line-solid"></div>
+                            <br>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-danger">正东：</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east" value="居民点">居民点</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east"  value="厂矿">厂矿</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east"  value="耕地">耕地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east"  value="林地">林地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east"  value="草地">草地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_east"  value="水域">水域</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="env_info_east" placeholder="正东方向其他" id="sample_env_info_east" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-success">正南：</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south" value="居民点">居民点</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south"  value="厂矿">厂矿</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south"  value="耕地">耕地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south"  value="林地">林地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south"  value="草地">草地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_south"  value="水域">水域</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="env_info_south" placeholder="正南方向其他" id="sample_env_info_south">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-navy">正西：</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west" value="居民点">居民点</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west"  value="厂矿">厂矿</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west"  value="耕地">耕地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west"  value="林地">林地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west"  value="草地">草地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_west"  value="水域">水域</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="env_info_west" placeholder="正西方向其他" id="sample_env_info_west" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-info">正北：</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north" value="居民点">居民点</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north"  value="厂矿">厂矿</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north"  value="耕地">耕地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north"  value="林地">林地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north"  value="草地">草地</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 m-b">
+                                            <div class="radio i-checks">
+                                                <label><input type="radio" name="env_info_north"  value="水域">水域</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 m-b">
+                                            <input type="text" class="form-control" name="env_info_north" placeholder="正北方向其他" id="sample_env_info_north">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <br>
+                            <h5 align="center">采样点照片编号</h5>
+                            <div class="hr-line-solid"></div>
+                            <br>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-danger">采样前</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control"  name="file" placeholder="采样后照片" id="sample_pic_after" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_after_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_after_img"  >
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-navy">采样后</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control"  name="file" placeholder="采样后照片" id="sample_pic_before" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_before_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_before_img"  >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-success">东侧</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control" name="file" placeholder="采样东侧照片" id="sample_pic_east" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_east_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_east_img"  >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-info">西侧</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control" name="file" placeholder="采样西侧照片" id="sample_pic_north" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_north_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_north_img"  >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-warning">南侧</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control"  name="file" placeholder="采样南侧照片" id="sample_pic_south" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_south_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_south_img"  >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-muted">北侧</label>
+                                <div class="col-sm-10">
+                                    <input type="file" accept="image/*" class="form-control" name="file"  placeholder="采样北侧照片" id="sample_pic_west" value="">
+                                    <a class="fancybox" href=""  id ="sample_pic_west_url">
+                                        <img class='img-responsive' src=''  id ="sample_pic_west_img"  >
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <br>
+                            <h5 align="center">样品信息</h5>
+                            <div class="hr-line-solid"></div>
+                            <br>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-info">样品重量</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <input type="text" class="form-control"  placeholder="样品重量" id="sample_weight">
+                                        <span class="input-group-addon">kg</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-success">备注信息</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b"  placeholder="备注信息" id="sample_remark">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-warning">样品属性</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="样品属性" id="sample_attribute">
+                                </div>
+                            </div>
+
+                            <br>
+                            <h5 align="center">填写人信息</h5>
+                            <div class="hr-line-solid"></div>
+                            <br>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-navy">采样人</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="采样人" id="sample_operator">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-success">记录人</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="记录人" id="sample_recorder">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-info">校准人</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control m-b" placeholder="校准人" id="sample_checker">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-warning">制表日期</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group date m-b" data-provide="datepicker">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="制表日期" id="sample_date">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-区号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b "  id ="sample_positon_1" name="sample_positon_1" onmouseover='InputClick(1)'></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-列号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b"  id ="sample_positon_2" name="sample_positon_2" onmouseover='InputClick(2)'></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-架号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b"  id ="sample_positon_3" name="sample_positon_3" onmouseover='InputClick(3)'></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-层号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b " id ="sample_positon_4" name="sample_positon_4" onmouseover='InputClick(4)'></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-行号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b " id ="sample_positon_5" name="sample_positon_5" onmouseover='InputClick(5)'></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label text-info">架柜-排号</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b "  id ="sample_positon_6" name="sample_positon_6" onmouseover='InputClick(6)'></select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" align="center">
+                                <div>
+
+                                    <button class="btn btn-primary" type="button" onclick="formUpdate()">保存内容</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <script type="text/javascript" src="js/self/common.js"></script>
+
+    <script type="text/javascript" src="js/self/interactivity.js"></script>
+
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- Prettyfile -->
+    <script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+
+    <!-- city -->
+    <script src="js/plugins/city/jquery.citys.js"></script>
+
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Fancy box -->
+    <script src="js/plugins/fancybox/jquery.fancybox.js"></script>
+
+    <script type="text/javascript" src="js/self/ajaxfileupload.js"></script>
+
+    <script type="text/javascript" src="js/self/input.js"></script>
+
+    <script type="text/javascript" src="js/self/modify.js"></script>
+
+    <script type="text/javascript" src="js/self/ajaxfileupload.js"></script>
+
+    <!-- jqGrid -->
+    <script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+    <script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+
+    <!-- Fancy box -->
+    <script src="js/plugins/fancybox/jquery.fancybox.js"></script>
+
+
+    <script>
+        $(function () {
+
+            init();
+
+            $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            });
+
+            $("input").on('ifClicked', function(event){
+                if(document.getElementById("sample_" + $(this).attr("name"))){
+                    document.getElementById("sample_" + $(this).attr("name")).value = "";
+                }
+
+            });
+
+            $("input").on("keydown",function(){
+                if($("input[name='"+$(this).attr("name")+"']")){
+                    $("input[name='"+$(this).attr("name")+"']").iCheck('uncheck');
+                }
+            });
+
+            initModify();
+
+        });
+
+    </script>
+
+
+
+</body>
+</html>

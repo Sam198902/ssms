@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.PointDao" >
+
+ 	<select id="getPointList" parameterType="java.util.Map" resultType="com.ssms.vo.Point">
+ 		
+ 		select * from ssms_point 
+ 	
+ 	</select>
+ 	
+ 	<insert id="setPoint" parameterType="java.util.Map">
+ 	
+ 		insert into ssms_point(position,sample_area,sample_city,sample_lat,sample_lon,sample_provice) 
+ 		values (
+ 			#{position},
+ 			#{sample_area},
+ 			#{sample_city},
+ 			#{sample_lat},
+ 			#{sample_lon},
+ 			#{sample_provice}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<delete id="delPoint" parameterType="java.util.Map">
+ 	
+ 		delete from ssms_point 
+ 		where sample_area=#{sample_area}
+ 		
+ 	</delete>
+ 
+ 	
+</mapper>

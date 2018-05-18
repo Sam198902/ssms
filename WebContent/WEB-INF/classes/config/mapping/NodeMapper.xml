@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.NodeDao" >
+ 	
+ 	<select id="getAllPosition1" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 1
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition1" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_1,count(*) as used_num from SSMS_RECORD group by sample_positon_1
+ 	
+ 	</select>
+
+	<select id="getAllPosition2" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 2
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition2" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_2,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		group by sample_positon_2
+ 	
+ 	</select>
+ 	
+ 	<select id="getAllPosition3"  parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 3
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition3" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_3,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		group by sample_positon_3
+ 	
+ 	</select>
+ 	
+ 	<select id="getAllPosition4" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 4
+ 		 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition4" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_4,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		group by sample_positon_4
+ 	
+ 	</select>
+ 	
+ 	<select id="getAllPosition5"  parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 5
+ 	
+ 	</select>
+ 	
+ 	 <select id="getUsedPosition5" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_5,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		and sample_positon_4 = #{sample_positon_4}
+ 		group by sample_positon_5
+ 	
+ 	</select>
+ 	
+ 	<select id="getAllPosition6"  parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_NODE where node_type = 6
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition6" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_6,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		and sample_positon_4 = #{sample_positon_4}
+ 		and sample_positon_5 = #{sample_positon_5}
+ 		group by sample_positon_6
+ 	
+ 	</select>
+ 	
+</mapper>

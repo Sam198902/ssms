@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.LocationDao" >
+
+	<select id="getAllPosition" resultType="java.util.Map">
+ 		
+ 		select * from SSMS_LOCATION_CONFIG 
+ 		where location_type = #{location_type} and location_up_value= #{location_up_value}
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition1" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_1 as sample_position,count(*) as used_num 
+ 		from SSMS_RECORD group by sample_positon_1
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition2" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_2 as sample_position,count(*) as used_num 
+ 		from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		group by sample_positon_2
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition3" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_3 as sample_position,count(*) as used_num from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		group by sample_positon_3
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition4" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_4 as sample_position,count(*) as used_num 
+ 		from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		group by sample_positon_4
+ 	
+ 	</select>
+ 	
+ 	 <select id="getUsedPosition5" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_5 as sample_position,count(*) as used_num 
+ 		from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		and sample_positon_4 = #{sample_positon_4}
+ 		group by sample_positon_5
+ 	
+ 	</select>
+ 	
+ 	<select id="getUsedPosition6" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select sample_positon_6 as sample_position,count(*) as used_num 
+ 		from SSMS_RECORD 
+ 		where sample_positon_1 = #{sample_positon_1} 
+ 		and sample_positon_2 = #{sample_positon_2}
+ 		and sample_positon_3 = #{sample_positon_3}
+ 		and sample_positon_4 = #{sample_positon_4}
+ 		and sample_positon_5 = #{sample_positon_5}
+ 		group by sample_positon_6
+ 	
+ 	</select>
+ 	
+ 	<insert id="setLocation" parameterType="java.util.Map">
+ 	
+ 		insert into SSMS_LOCATION_CONFIG(location_type,location_value,location_up_value,location_max_node) 
+ 		values (
+ 			#{location_type},
+ 			#{location_value},
+ 			#{location_up_value},
+ 			#{location_max_node}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<delete id="delLocation" parameterType="java.util.Map">
+ 	
+ 		delete from SSMS_LOCATION_CONFIG 
+ 		where location_type=#{location_type} and location_up_value=#{location_up_value}
+ 		
+ 	</delete>
+ 	
+ 	 <delete id="delAllLocation" parameterType="java.util.Map">
+ 	
+ 		delete from SSMS_LOCATION_CONFIG 
+ 		where 1=1
+ 		
+ 	</delete>
+ 	
+ 	<select id="getLocationList" parameterType="java.util.Map" resultType="com.ssms.vo.Location">
+ 	
+ 		select * from SSMS_LOCATION_CONFIG 
+ 		where location_type=#{location_type} and location_up_value=#{location_up_value}
+ 		
+ 	</select>
+ 	
+ 	
+ 	<select id="getLocationUpValue" parameterType="java.util.Map" resultType="com.ssms.vo.Location">
+ 	
+ 		select * from SSMS_LOCATION_CONFIG 
+ 		where location_type=#{location_type} and location_value=#{location_value}
+ 		
+ 	</select>
+ 	
+</mapper>

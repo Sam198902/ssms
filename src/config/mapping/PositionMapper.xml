@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.PositionDao" >
+ 	
+ 	<insert id="setPosition" parameterType="java.util.Map">
+ 	
+ 		insert into SSMS_POSITION_CONFIG(position_type,position_value,postion_nickname,position_up_value) 
+ 		values (
+ 			#{position_type},
+ 			#{position_value},
+ 			#{postion_nickname},
+ 			#{position_up_value}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<delete id="delPosition" parameterType="java.util.Map">
+ 	
+ 		delete from SSMS_POSITION_CONFIG 
+ 		where position_type=#{position_type} and 
+ 			position_value=#{position_value}
+ 		
+ 	</delete>
+ 	
+ 	<select id="getPositionList" parameterType="java.util.Map" resultType="com.ssms.vo.Position">
+ 	
+ 		select * from SSMS_POSITION_CONFIG 
+ 		where position_type=#{position_type}
+ 		
+ 	</select>
+ 	
+</mapper>

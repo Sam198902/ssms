@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.ConfigDao" >
+
+ 	<select id="getConfigList" parameterType="java.util.Map" resultType="java.util.Map">
+ 		
+ 		select * from ssms_config
+ 		<if test="ssms_key != null">where ssms_key = #{ssms_key}</if>
+ 	
+ 	</select>
+ 	
+ 	<insert id="setConfig" parameterType="java.util.Map">
+ 	
+ 		insert into ssms_config(ssms_key,ssms_value) 
+ 		values (
+ 			#{ssms_key},
+ 			#{ssms_value}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<delete id="delConfig" parameterType="java.util.Map">
+ 	
+ 		delete from ssms_config 
+ 		where ssms_key=#{ssms_key}
+ 		
+ 	</delete>
+ 	
+ 	<update id="updConfig" parameterType="java.util.Map">
+ 	
+ 		update ssms_config set ssms_value = #{ssms_value}
+ 		where ssms_key=#{ssms_key}
+ 		
+ 	</update>
+ 
+ 	
+</mapper>

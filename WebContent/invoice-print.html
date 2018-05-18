@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta name="keywords" content="土壤样品管理">
+    <meta name="description" content="土壤样品管理">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+    <style>
+        #oDiv2 div{width: 100mm;height: 80mm;border:1mm solid #c50000;}
+    </style>
+
+
+</head>
+
+<body >
+<div id="oDiv2">
+
+    <section >
+
+
+        <p class="h_p" id="label_id">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_face">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_using">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_type">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_texture">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_time">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_place">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_localize1">Amount Due 2/22/2014</p>
+        <p class="h_p" id="label_localize2">Amount Due 2/22/2014</p>
+        <canvas  id="barcode" ></canvas >
+
+
+    </section><!-- /.content -->
+
+</div><!-- ./wrapper -->
+
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+
+<script type="text/javascript" src="js/self/common.js"></script>
+
+<script type="text/javascript" src="js/self/interactivity.js"></script>
+
+<script type="text/javascript" src="js/self/print.js"></script>
+
+<script src="js/JsBarcode.all.js"></script>
+
+<script>
+    $(function () {
+        InitPrint();
+
+        window.print();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>土壤样品管理</title>
+    <meta name="keywords" content="土壤样品管理">
+    <meta name="description" content="土壤样品管理">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>用户信息管理</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <h4 class="m-t"></h4>
+                    <div class="jqGrid_wrapper">
+                        <table id="table_list"></table>
+                        <div id="pager_list"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="list-group">
+                        <h3 class="list-group-item-heading">区域设置</h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="citymodel" class="citys">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">省</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b " data-placeholder="省"  id ="sample_provice" name="province" data-pos="0">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">市/区</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b " data-placeholder="市/区"  id ="sample_city" name="city" data-pos="0">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">县</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b " data-placeholder="县" id="sample_area" name="area" data-pos="0">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">东经</label>
+                            <div class="col-sm-10">
+                                <div class="input-group m-b">
+                                    <input type="text" class="form-control m-b" placeholder="东经"  id="sample_lon" >
+                                    <span class="input-group-addon">°</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">北纬</label>
+                            <div class="col-sm-10">
+                                <div class="input-group m-b">
+                                    <input type="text" class="form-control m-b" placeholder="北纬"  id="sample_lat" >
+                                    <span class="input-group-addon">°</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <div>
+                            <button class="btn btn-primary" type="button" onclick="Set_Position()">保存设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="list-group">
+                        <h3 class="list-group-item-heading">货柜设置</h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">选择设置</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b"   id="status">
+                                <option disabled selected value></option>
+                                <option value=1>单独货柜设置:区号</option>
+                                <option value=2>单独货柜设置:列号</option>
+                                <option value=3>单独货柜设置:架号</option>
+                                <option value=4>单独货柜设置:层号</option>
+                                <option value=5>单独货柜设置:行号</option>
+                                <option value=6>单独架柜-区号:排号</option>
+                                <option value=7>整体货柜设置:区号</option>
+                                <option value=8>整体货柜设置:列号</option>
+                                <option value=9>整体货柜设置:架号</option>
+                                <option value=10>整体货柜设置:层号</option>
+                                <option value=11>整体货柜设置:行号</option>
+                                <option value=12>整体货柜设置:排号</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon1">
+                        <label  class="col-sm-2 control-label">架柜-区号</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b "  id ="sample_positon_1" name="sample_positon_1" onmousedown='InputClick(1)'></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon2">
+                        <label  class="col-sm-2 control-label">架柜-列号</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b "  id ="sample_positon_2" name="sample_positon_2" onmousedown='InputClick(2)'></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon3">
+                        <label  class="col-sm-2 control-label">架柜-架号</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b "  id ="sample_positon_3" name="sample_positon_3" onmousedown='InputClick(3)'></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon4">
+                        <label  class="col-sm-2 control-label">架柜-层号</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b " id ="sample_positon_4" name="sample_positon_4" onmousedown='InputClick(4)'></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon5">
+                        <label  class="col-sm-2 control-label">架柜-行号</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b "   id ="sample_positon_5" name="sample_positon_5" onmousedown='InputClick(5)'></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon6">
+                        <label  class="col-sm-2 control-label" id="label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon8">
+                        <label  class="col-sm-2 control-label" >架柜-区号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入区号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location1" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon9">
+                        <label  class="col-sm-2 control-label">架柜-列号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入列号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location2" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon10">
+                        <label  class="col-sm-2 control-label">架柜-架号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入架号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location3" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon11">
+                        <label  class="col-sm-2 control-label">架柜-层号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入层号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location4" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon12">
+                        <label  class="col-sm-2 control-label">架柜-行号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入行号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location5" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon13">
+                        <label  class="col-sm-2 control-label">架柜-排号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="请输入排号设置，多个请用逗号分开，分开如： 'A,B,C' 或者 '1,3,4'"  id="location6" >
+                        </div>
+                    </div>
+                    <div class="form-group" id="positon7">
+                        <label  class="col-sm-2 control-label">最大可以存放的样品数</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="设置最大可以存放的样品数，如位置最大2000个。设置2000，该列最大500，设置500"  id="maxNum" >
+                        </div>
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <div>
+                            <button class="btn btn-primary" type="button" onclick="Set_Location()">保存设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="list-group">
+                        <h3 class="list-group-item-heading">数据同步设置</h3>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+
+
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">服务器地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control m-b" placeholder="同步数据远程服务器地址"  id="RoadURL" >
+                        </div>
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <div>
+                            <button class="btn btn-primary" type="button" onclick="Set_URL()">保存设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<script src="js/layer/layer.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- jqGrid -->
+<script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+<script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<script type="text/javascript" src="js/self/common.js"></script>
+
+<script type="text/javascript" src="js/self/interactivity.js"></script>
+
+<script type="text/javascript" src="js/self/user.js"></script>
+
+<!-- Sweet alert -->
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- city -->
+<script src="js/plugins/city/jquery.citys.js"></script>
+
+
+
+
+
+</body>
+
+</html>

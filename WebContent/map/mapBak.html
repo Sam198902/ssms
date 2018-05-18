@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>map</title>
+    <!--界面显示框架-->
+     <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+
+     <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../plugins/ionicons/css/ionicons.min.css">
+
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="assets/css/layui.css">
+    <!--实例样式-->
+    <link rel="stylesheet" href="assets/css/map.css">
+    <link rel="stylesheet" href="assets/font/mine-font/iconfont.css">
+    <!--google map-->
+    <script src="google/js/main.js "></script>
+    <script src="google/js/maplabel-compiled.js "></script>
+    <script src="google/js/MeasureTool.js "></script>
+    <!--绘制、测量-->
+    <script src="google/js/drawing.js "></script>
+    <style type="text/css">
+        *{margin:0; padding:0;}
+        a{text-decoration:none; color:#000; }
+        .ban{ margin:12% auto; -display: none;}
+        .ban span{width:224px; height:164px; float:left; margin:0 5px 5px 0;}
+        .ban span img{width:220px; height:160px; border-radius:5px;}
+        .dis{width:100%; height:100%; position: absolute; top:0; left:0;  background:rgba(0,0,0,0.8); display: none;}
+        .mark{width:100%; height:100%; display: block; position: absolute; top:0; left:0;background:rgba(255, 255, 255, 0.8);}
+        .showImg{position: relative; top:30%; left:35%; width:30%; height:40%; z-index: 100;}
+        .showImg img{position: absolute; top:0; left:0; width:100%; height:100%; border:2px solid #fff; border-radius:15px;}
+        .back{font-size:40px; text-align:center; line-height:100px; width:50px; height:100px; background:#fff; border-radius: 15px; position: absolute; left:10%; top:45%; z-index: 100;}
+        .next{font-size:40px; text-align:center; line-height:100px; width:50px; height:100px; background:#fff; border-radius: 15px; position: absolute; right:10%; top:45%; z-index: 100;}
+    </style>
+</head>
+
+<body>
+    <!--地图容器-->
+    <div id="map_container" class="map-container"></div>
+    <!--右上侧工具-->
+    <div class="map-controls">
+        <div class="icon-font icon-ditufangda map-controls-button " title="放大" onclick="zoomIn()"></div>
+        <div class="icon-font icon-ditusuoxiao map-controls-button " title="缩小" onclick="zoomOut()"></div>
+        <!--<div class="icon-font icon-daohang map-controls-button " title="定位" onclick="geolocation()"></div>-->
+    </div>
+    <div class="map-info">
+        <label id="zoom-level">缩放级别：13</label>
+        <label id="map-center">左击获取经纬度： </label>
+    </div>
+
+    <section class="content" >
+        <div div class="modal fade" id="print-show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="box-tools pull-right">
+                <button class="btn " data-widget="remove" onClick="CloseResume()"><i class="fa fa-remove"></i></button>
+            </div>
+         
+            <!-- Main content -->
+            <section class="invoice" >
+               <p class="h4" id="Resume_id">Amount Due 2/22/2014</p>
+
+                <div class="row invoice-info">
+                    <div class="col-sm-3 invoice-col" id = "Resume_msg">
+                    </div><!-- /.col -->
+                    <div class="col-sm-3 invoice-col" id = "Resume_people">
+                    </div><!-- /.col -->
+                    <div class="col-sm-3 invoice-col" id = "Resume_table">
+                    </div>
+                    <div class="col-sm-3 invoice-col" id = "Resume_info">
+                    </div>
+                    <div class="ban" id="ban">
+                        <span><img  src='' alt='采样前' id ="Resume_PhotoBefore" ></span>
+                        <span><img  src='' alt='采样后' id ="Resume_PhotoAfter"></span>
+                        <span><img  src='' alt='东侧' id ="Resume_PhotoEast"></span>
+                        <span><img  src='' alt='西侧' id ="Resume_PhotoSouth"></span>
+                        <span><img  src='' alt='南侧' id ="Resume_PhotoWest"></span>
+                        <span><img  src='' alt='北侧' id ="Resume_PhotoNorth"></span>
+                    </div>
+                    <div class="dis" id="dis">
+                        <div class="showImg">
+                            <img  src='' alt='采样前' id ="Resume_PhotoBefore1" >
+                            <img  src='' alt='采样后' id ="Resume_PhotoAfter1">
+                            <img  src='' alt='东侧' id ="Resume_PhotoEast1">
+                            <img  src='' alt='西侧' id ="Resume_PhotoSouth1">
+                            <img  src='' alt='南侧' id ="Resume_PhotoWest1">
+                            <img  src='' alt='北侧' id ="Resume_PhotoNorth1">
+                        </div>
+                        <a href="###" class="back" id="back"></a>
+                        <a href="###" class="next" id="next">></a>
+                        <span class="mark"></span>
+                    </div>
+                </div><!-- /.row -->
+
+            </section><!-- /.content -->
+        </div>
+
+   </section>
+   
+
+
+     <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!--框架即功能javascript-->
+    <script src=" assets/layui.js "></script>
+    <script src="map.js "></script>
+    <script src="assets/common.js "></script>
+    <script src="assets/tinycolor.js "></script>
+    <script type="text/javascript">
+        $(function(){
+            
+            $('#ban > span').click(function(){
+                $('#dis').fadeIn(100);
+                // var $index = $(this).index();
+                // var $l = $('#dis  img').size();
+                // for(var i=0; i<$l; i++){
+                //     var $src = 'show/'+$index+'/'+(i+1)+'.jpg';
+                //     $('#dis  img').eq(i).attr('src',$src);
+                // }
+            })
+            //点击上一个
+            $('#back').click(function(){
+                var $width = $('#dis img').eq(0).width();
+                
+                $('#dis img').filter(':last').stop().animate({'left':'-'+$width},500,function(){
+                    $(this).prependTo($('.showImg'));
+                    $(this).stop().animate({'left':'0'},500)
+                })
+                //div跟着动
+                $('.showImg').stop().animate({'left':'38%'},500,function(){
+                    $('.showImg').stop().animate({'left':'35%'},500);
+                });
+            })
+            //点击下一个
+            $('#next').click(function(){
+                var $width = $('#dis img').eq(0).width();
+                $('#dis img').filter(':first').stop().animate({'left':$width},500,function(){
+                    $(this).appendTo($('.showImg'));
+                    $(this).stop().animate({'left':'0'});
+                })
+                //div跟着动
+                $('.showImg').stop().animate({'left':'32%'},500,function(){
+                    $('.showImg').stop().animate({'left':'35%'},500);
+                });
+            })
+            //点击空白dis消失
+            $('.mark').click(function(){
+                $('#dis').fadeOut(100);
+            })
+            
+        })
+    </script>
+
+
+</body>
+
+</html>

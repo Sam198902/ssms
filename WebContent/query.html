@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>土壤样品管理</title>
+    <meta name="keywords" content="土壤样品管理">
+    <meta name="description" content="土壤样品管理">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight" >
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">
+                        <div id="citymodel" class="citys">
+                            <br>
+                            <br>
+                            <!--<div class="form-group" id = "show_provice">-->
+                                <!--<label class="col-sm-2 control-label">省</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<select class="form-control m-b " data-placeholder="省"  id ="sample_provice" name="province" data-pos="0">-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label class="col-sm-2 control-label">市/区</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b " data-placeholder="市/区"  id ="sample_city" name="city" data-pos="0">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="col-sm-2 control-label">县</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b " data-placeholder="县" id="sample_area" name="area" data-pos="0">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" id = "show_towns">
+                                        <label class="col-sm-2 control-label">乡镇</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b"  data-placeholder="请选择乡镇"  id ="sample_towns">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" id = "show_village">
+                                        <label class="col-sm-2 control-label">村/街道</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b"  data-placeholder="请选择村/街道"  id ="sample_village">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10" align="center">
+                                <br>
+                                <button class="btn btn-primary" type="button" onclick="QueryData()"><i class="fa fa-search" ></i>搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" id = "show_table">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>查询信息</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <h4 class="m-t"></h4>
+                    <div class="jqGrid_wrapper">
+                        <table id="table_list"></table>
+                        <div id="pager_list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<script src="js/layer/layer.js"></script>
+
+
+<script type="text/javascript" src="js/self/common.js"></script>
+
+<script type="text/javascript" src="js/self/interactivity.js"></script>
+
+<!-- Data picker -->
+<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+
+<!-- city -->
+<script src="js/plugins/city/jquery.citys.js"></script>
+
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Sweet alert -->
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<!-- jqGrid -->
+<script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+<script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+
+<!-- Fancy box -->
+<script src="js/plugins/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript" src="js/self/query.js"></script>
+
+
+
+
+</body>
+</html>

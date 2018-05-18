@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.SampleIODao" >
+ 	
+ 	<insert id="input" parameterType="java.util.Map">
+ 	
+ 		insert into SSMS_IO_RECORD(sample_id,sample_in_time,sample_in_type,sample_in_operator,sample_in_weight,sample_in_status,sample_in_error_reason,sample_in_ext,sample_io_type) 
+ 		values (
+ 			#{sample_id},
+ 			#{sample_in_time},
+ 			#{sample_in_type},
+ 			#{sample_in_operator},
+ 			#{sample_in_weight},
+ 			#{sample_in_status},
+ 			#{sample_in_error_reason},
+ 			#{sample_in_ext},
+ 			#{sample_io_type}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<select id="list" parameterType="java.util.Map" resultType="com.ssms.vo.SampleIO">
+ 	
+ 		select * from SSMS_IO_RECORD where 1=1
+		<if test="sample_id != null">and sample_id like '%${sample_id}%'</if>
+		<if test="sample_in_operator != null">and sample_in_operator like '%${sample_in_operator}%'</if>
+ 		<if test="sample_in_type != null">and sample_in_type like '%${sample_in_type}%'</if>
+ 		<if test="sample_in_status != null">and sample_in_status like '%${sample_in_status}%'</if>
+ 		<if test="sample_io_type != null">and sample_io_type like '%${sample_io_type}%'</if>
+ 	</select>
+ 	
+</mapper>

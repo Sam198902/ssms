@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssms.dao.SampleDao" >
+ 	
+ 	<insert id="addSample" parameterType="java.util.Map">
+ 	
+ 		insert into SSMS_RECORD(sample_id,sample_provice,sample_city,sample_area,sample_towns,sample_village,sample_time,sample_weather,sample_depth,sample_lon,sample_lat,sample_altitude,sample_use_type,sample_using,sample_soil_face,sample_soil_type,sample_soil_texture,sample_soil_color,sample_env_info_east,sample_env_info_south,sample_env_info_west,sample_env_info_north,sample_pic_before,sample_pic_after,sample_pic_east,sample_pic_south,sample_pic_west,sample_pic_north,sample_weight,sample_remark,sample_operator,sample_recorder,sample_checker,sample_date,sample_positon_1,sample_positon_2,sample_positon_3,sample_positon_4,sample_positon_5,sample_positon_6,take_weight,sample_attribute) 
+ 		values (
+ 			#{sample_id},
+ 			#{sample_provice},
+ 			#{sample_city},
+ 			#{sample_area},
+ 			#{sample_towns},
+ 			#{sample_village},
+ 			#{sample_time},
+ 			#{sample_weather},
+ 			#{sample_depth},
+ 			#{sample_lon},
+ 			#{sample_lat},
+ 			#{sample_altitude},
+ 			#{sample_use_type},
+ 			#{sample_using},
+ 			#{sample_soil_face},
+ 			#{sample_soil_type},
+ 			#{sample_soil_texture},
+ 			#{sample_soil_color},
+ 			#{sample_env_info_east},
+ 			#{sample_env_info_south},
+ 			#{sample_env_info_west},
+ 			#{sample_env_info_north},
+ 			#{sample_pic_before},
+ 			#{sample_pic_after},
+ 			#{sample_pic_east},
+ 			#{sample_pic_south},
+ 			#{sample_pic_west},
+ 			#{sample_pic_north},
+ 			#{sample_weight},
+ 			#{sample_remark},
+ 			#{sample_operator},
+ 			#{sample_recorder},
+ 			#{sample_checker},
+ 			#{sample_date},
+ 			#{sample_positon_1},
+ 			#{sample_positon_2},
+ 			#{sample_positon_3},
+ 			#{sample_positon_4},
+ 			#{sample_positon_5},
+ 			#{sample_positon_6},
+ 			#{take_weight},
+ 			#{sample_attribute}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<select id="getSample" parameterType="java.util.Map" resultType="com.ssms.vo.Sample">
+ 		
+ 		select * from SSMS_RECORD where sample_id = #{sample_id}
+ 	
+ 	</select>
+ 	
+ 	 <select id="getSampleListByKeyword" parameterType="java.util.Map" resultType="com.ssms.vo.Sample">
+ 		
+ 		select * from SSMS_RECORD where sample_id like '%${keyword}%' or
+ 		sample_city like '%${keyword}%' or sample_area like '%${keyword}%' or
+ 		sample_towns like '%${keyword}%' or sample_lon like '%${keyword}%' or
+ 		sample_lat like '%${keyword}%'
+ 	
+ 	</select>
+ 	
+ 	<select id="getSampleListByKeywords" parameterType="java.util.Map" resultType="com.ssms.vo.Sample"> 		
+ 		select * from SSMS_RECORD where
+ 		sample_city like '%${City}%' and sample_area like '%${Area}%'
+ 		<if test="Town != null">and sample_towns like '%${Town}%'</if>
+ 		<if test="Village != null">and sample_village like '%${Village}%'</if>
+ 	</select>
+ 	
+ 	<select id="getTownListFromSample" parameterType="java.util.Map" resultType="java.lang.String"> 		
+ 		select distinct sample_towns from SSMS_RECORD where
+ 		sample_city like '%${City}%' and sample_area like '%${Area}%'
+ 		<if test="Town != null">and sample_towns like '%${Town}%'</if>
+ 		<if test="Village != null">and sample_village like '%${Village}%'</if>
+ 	</select>
+ 	
+ 	<select id="getVillageListFromSample" parameterType="java.util.Map" resultType="java.lang.String"> 		
+ 		select distinct sample_village from SSMS_RECORD where
+ 		sample_city like '%${City}%' and sample_area like '%${Area}%'
+ 		<if test="Town != null">and sample_towns like '%${Town}%'</if>
+ 		<if test="Village != null">and sample_village like '%${Village}%'</if>
+ 	</select>
+ 	
+ 	<update id="updateSample" parameterType="java.util.Map">
+ 	
+ 		update SSMS_RECORD set
+ 			sample_provice=#{sample_provice},
+			sample_city=#{sample_city},
+			sample_area=#{sample_area},
+			sample_towns=#{sample_towns},
+			sample_village=#{sample_village},
+			sample_time=#{sample_time},
+			sample_weather=#{sample_weather},
+			sample_depth=#{sample_depth},
+			sample_lon=#{sample_lon},
+			sample_lat=#{sample_lat},
+			sample_altitude=#{sample_altitude},
+			sample_use_type=#{sample_use_type},
+			sample_using=#{sample_using},
+			sample_soil_face=#{sample_soil_face},
+			sample_soil_type=#{sample_soil_type},
+			sample_soil_texture=#{sample_soil_texture},
+			sample_soil_color=#{sample_soil_color},
+			sample_env_info_east=#{sample_env_info_east},
+			sample_env_info_south=#{sample_env_info_south},
+			sample_env_info_west=#{sample_env_info_west},
+			sample_env_info_north=#{sample_env_info_north},
+			sample_pic_before=#{sample_pic_before},
+			sample_pic_after=#{sample_pic_after},
+			sample_pic_east=#{sample_pic_east},
+			sample_pic_south=#{sample_pic_south},
+			sample_pic_west=#{sample_pic_west},
+			sample_pic_north=#{sample_pic_north},
+			sample_weight=#{sample_weight},
+			sample_remark=#{sample_remark},
+			sample_operator=#{sample_operator},
+			sample_recorder=#{sample_recorder},
+			sample_checker=#{sample_checker},
+			sample_date=#{sample_date},
+			sample_positon_1=#{sample_positon_1},
+			sample_positon_2=#{sample_positon_2},
+			sample_positon_4=#{sample_positon_4},
+			sample_positon_4=#{sample_positon_4},
+			sample_positon_5=#{sample_positon_5},
+			sample_positon_6=#{sample_positon_6},
+			take_weight=#{take_weight},
+			sample_attribute=#{sample_attribute}
+ 		where sample_id=#{sample_id}
+ 		
+ 	</update>
+ 	
+ 	<delete id="deleteSample" parameterType="java.util.Map">
+ 	
+ 		delete from SSMS_RECORD where sample_id = #{sample_id}
+ 	
+ 	</delete>
+ 	
+ 	<select id="getSampleList" parameterType="java.util.Map" resultType="com.ssms.vo.Sample">
+ 		
+ 		select * from SSMS_RECORD order by sample_id 
+ 		<if test="pageNo != null and pageSize != null">limit ${pageNo},${pageSize}</if>
+ 		<if test="pageNo != null and pageSize == null">limit ${pageNo},20</if>
+ 		<if test="pageNo == null and pageSize != null">limit 0,${pageSize}</if>
+ 		<if test="pageNo == null and pageSize == null">limit 0,20</if>
+ 	
+ 	</select>
+ 	
+ 	<select id="getSampleNo" parameterType="java.util.Map" resultType="java.lang.Integer">
+ 		
+ 		select count(*) from SSMS_RECORD
+ 		where sample_area = #{sample_area} and
+ 			sample_time = #{sample_time} and
+ 			sample_depth = #{sample_depth} and
+ 			sample_use_type = #{sample_use_type}
+ 	</select>
+ 	
+ 	<select id="getNotSyncSample" resultType="com.ssms.vo.Sample">
+ 	
+ 		select * from SSMS_RECORD 
+ 		where sample_id not in (select sample_id from ssms_sync_record)
+ 		limit 0,10
+ 	
+ 	</select>
+ 	<insert id="setSyncSampleFlag" parameterType="java.util.Map">
+ 		
+ 		insert into ssms_sync_record(sample_id,sync_time) values(#{sample_id},#{sync_time})
+ 		
+ 	</insert>
+ 	
+ 	
+</mapper>

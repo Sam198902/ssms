@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" href="../favicon.ico" mce_href="../favicon.ico" type="image/x-icon">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <style>  
+      #oDiv2 div{width: 100mm;height: 80mm;border:1mm solid #c50000;}  
+    </style> 
+
+ 
+  </head>
+
+  <body >
+    <div id="oDiv2">
+
+      <section >
+      
+        
+        <p class="h6" id="label_id">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_face">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_using">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_type">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_texture">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_time">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_place">Amount Due 2/22/2014</p>
+        <p class="h6" id="label_localize">Amount Due 2/22/2014</p>
+        <canvas  id="barcode" ></canvas >
+        <!-- <p class="h6" id="label_barcode" align="center">Amount Due 2/22/2014</p> -->
+        
+        
+      </section><!-- /.content -->
+
+    </div><!-- ./wrapper -->
+
+      <!-- jQuery 2.1.4 -->
+    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+
+    <script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
+
+    <script src="../dist/js/JsBarcode.all.js"></script>
+
+    <script src="../js/common.js"></script>
+
+    <script src="../js/print.js"></script>
+
+    <script>
+        $(function () {
+          InitPrint();
+
+          window.print();
+        });
+    </script>
+  </body>
+</html>
